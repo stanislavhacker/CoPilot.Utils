@@ -30,7 +30,7 @@ namespace CoPilot.Utils.Dependencies
                     var videoPath = player.GetValue(VideoPathProperty) as String;
                     try
                     {
-                        stream = Storage.OpenFile(videoPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Write);
+                        stream = Storage.OpenFile(videoPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
                         player.SetSource(stream);
                     }
                     catch
@@ -62,7 +62,7 @@ namespace CoPilot.Utils.Dependencies
             {
                 try
                 {
-                    stream = Storage.OpenFile(videoPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.Write);
+                    stream = Storage.OpenFile(videoPath, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
                     player.SetSource(stream);
                 }
                 catch
