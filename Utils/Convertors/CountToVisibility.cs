@@ -13,6 +13,10 @@ namespace CoPilot.Utils.Convertors
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (Double.IsNaN((Double)value))
+            {
+                return Visibility.Collapsed;
+            }
             double val = Double.Parse(value.ToString(), CultureInfo.InvariantCulture);
             double min = Double.Parse((string)parameter, CultureInfo.InvariantCulture);
             return val > min ? Visibility.Visible : Visibility.Collapsed;
