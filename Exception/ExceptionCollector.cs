@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Phone.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 
 namespace CoPilot.Utils.Exception
@@ -73,6 +75,37 @@ namespace CoPilot.Utils.Exception
             var message = x.ToString();
             //save to isolated storage
             Settings.Add("error", message);
+        }
+
+        /// <summary>
+        /// Send error
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        public static void SendError(string title, string description)
+        {
+            var error = Settings.Get("error");
+            if (error != null)
+            {
+                var result = MessageBox.Show(description, title, MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    EmailComposeTask email = new EmailComposeTask();
+                    email.To = "stanislav.hacker@live.com";
+                    email.Subject = "Error in Co-Pilot app";
+
+                    var message = new StringBuilder();
+                    message.AppendLine("There is an error from application:");
+                    message.AppendLine(Environment.NewLine);
+                    message.AppendLine(error);
+
+                    email.Body = message.ToString();
+                    email.Show();
+                }
+
+                Settings.Remove("error");
+                Settings.Save();
+            }
         }
     }
 }
