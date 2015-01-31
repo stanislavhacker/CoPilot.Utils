@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<ProductListings>
+    <ProductListing Key="remove_adds" Purchased="false" Fulfilled="false">
+        <Name>Remove Ads</Name>
+        <Description>Removing ads in the application and support developer.</Description>
+        <ProductId>remove_adds</ProductId>
+        <ProductType>Durable</ProductType>
+        <FormattedPrice>$0.99</FormattedPrice>
+        <ImageUri></ImageUri>
+        <Keywords></Keywords>
+        <Tag></Tag>
+    </ProductListing>
+</ProductListings>

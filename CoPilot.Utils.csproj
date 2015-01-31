@@ -118,8 +118,16 @@
       <Project>{56a546f8-d004-4b9d-9f8c-4a8c992dabdf}</Project>
       <Name>CoPilot.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\libs\MockIAP\MockIAPLib.csproj">
+      <Project>{015e3dfe-eb56-429f-95ef-bab5d41b23be}</Project>
+      <Name>MockIAPLib</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="IAPMock\mock.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
