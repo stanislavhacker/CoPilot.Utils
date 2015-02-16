@@ -27,6 +27,22 @@ namespace CoPilot.Utils
         private const String REMOVE_ADS_ID = "remove_adds";
 
         /// <summary>
+        /// In progress
+        /// </summary>
+        private static bool inProgress = false;
+        public static bool InProgress
+        {
+            get
+            {
+                return inProgress;
+            }
+            set
+            {
+                inProgress = value;
+            }
+        }
+
+        /// <summary>
         /// Is Addvertismets
         /// </summary>
         private static bool isAddvertismets = true;
@@ -56,16 +72,27 @@ namespace CoPilot.Utils
         /// <returns></returns>
         public static async Task BuyIsAddvertismets()
         {
-            //load data
-            await loadListingInformation();
-            //request purchase
+            if (inProgress)
+            {
+                return;
+            }
+            //set flag
+            inProgress = true;
+            //get data and do fulfillment
             try
             {
+                //load data
+                await loadListingInformation();
+                //request purchase
                 await CurrentApp.RequestProductPurchaseAsync(REMOVE_ADS_ID, false);
+                //DoFulfillment
                 DoFulfillment();
+                //clear flag
+                inProgress = false;
             }
             catch
             {
+                inProgress = false;
                 return;
             }
         }
@@ -95,6 +122,9 @@ namespace CoPilot.Utils
         /// <returns></returns>
         private static async Task loadListingInformation()
         {
+#if DEBUG
+            await Task.Delay(2000);
+#endif
             if (listings == null) {
                 List<String> products = new List<string>();
                 products.Add(REMOVE_ADS_ID);
